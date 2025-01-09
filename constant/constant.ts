@@ -11,7 +11,7 @@ export const navlinks = [
        },
        {
         id: 3,
-        url: '/Testimonial',
+        url: '#testimonial',
         label: 'Testimonial'
        },
        {
@@ -19,10 +19,14 @@ export const navlinks = [
         url: '/contact',
         label: 'Contact'
        },
-       {
-        id: 5,
-        url: '#',
-        label: 'Blog'
-       },
+       
        
 ]
+export const  logos = [
+    "/client1.jpg", // Replace with your actual logo paths
+      "/client2.jpg",
+      "/client3.jpg",
+      "/client4.jpg",
+      "/client5.jpg",
+      "/client6.jpg",
+  ];

@@ -1,55 +1,85 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { navlinks } from '../../../constant/constant'
-import Link from 'next/link'
-import { HiBars3BottomRight } from 'react-icons/hi2'
-import logo from '../../../public/logo-removebg-preview.png'
+'use client';
 
-// define nav props
-type Props ={
-  openNav:()=>void
-}
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { navlinks } from '../../../constant/constant';
+import Link from 'next/link';
+import { HiBars3BottomRight } from 'react-icons/hi2';
+import logo from '../../../public/logo-removebg-preview.png';
 
-const Nav = ({openNav}:Props) => {
-const [navbg,setnavbg] = useState(false)
- useEffect(()=> {
-  const handler = ()=>{
-    if(window.scrollY>=99){
-      setnavbg(true)
-    }
-    if(window.scrollY<99){
-      setnavbg(false)
-    }
-  }
-  window.addEventListener('scroll', handler)
-  return ()=>window.removeEventListener('scroll', handler)
+// Define nav props
+type Props = {
+  openNav: () => void;
+};
 
- })
+const Nav = ({ openNav }: Props) => {
+  const [navbg, setNavbg] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setNavbg(window.scrollY >= 99);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Split navigation links
+  const leftLinks = navlinks.slice(0, Math.ceil(navlinks.length / 2));
+  const rightLinks = navlinks.slice(Math.ceil(navlinks.length / 2));
+
   return (
-    <div className={`fixed ${navbg?'bg-indigo-800':'fixed'} w-full transition-all duration-200 h-[12vh]  z-[1000]`}>
-      <div className='flex items-center h-full justify-between w-[90%] xl:w[80%] mx-auto'>
- {/* logo */}
- <Image src={logo} alt='logo' className='rounded-2xl' width={200} height={120}/>
-     {/* nav links */}
-     <div className='hidden lg:flex items-center space-x-10'>
-      {navlinks.map((link)=>{
-        return <Link key={link.id} href={link.url}>
-           <p className='nav__link'>{link.label}</p>
-        </Link>
-      })}
-     </div>
-     {/* button */}
-     <div className='flex items-center space-x-4'>
-     <button className="px-6 py-2 text-base md:text-lg hover:bg-[#8becda]  font-semibold border-2 border-[#B8FFF9] text-black rounded-lg shadow-md bg-[#B8FFF9] hover:text-gray-900 hover:scale-105 transition-transform duration-300">
-              Schedule a Meeting
-            </button>
-      {/* burder */}
-      <HiBars3BottomRight onClick={openNav} className='w-8 h-8 cursor-pointer text-white lg:hidden '/>
-     </div>
-      </div>
-      </div>
-  )
-}
+    <header
+      className={`fixed top-0 w-full z-[1000] h-[12vh] transition-all duration-200  ${
+        navbg
+          ? 'bg-white bg-opacity-5 backdrop-blur-lg shadow-lg'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="flex items-center justify-between h-full w-[90%] xl:w-[80%] mx-auto ">
+        {/* Left Navigation Links */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          {leftLinks.map((link) => (
+            <Link key={link.id} href={link.url}>
+              <p className="text-white font-medium nav__link transition duration-300">
+                {link.label}
+              </p>
+            </Link>
+          ))}
+        </nav>
 
-export default Nav
+        {/* Logo in Center */}
+        <div className="flex-shrink-0 flex justify-center items-center">
+          <Image
+            src={logo}
+            alt="ContentAid Logo"
+            className="rounded-lg"
+            width={120}
+            height={80}
+            priority
+          />
+        </div>
+
+        {/* Right Navigation Links */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          {rightLinks.map((link) => (
+            <Link key={link.id} href={link.url}>
+              <p className="text-white font-medium hover:text-[#8becda] transition duration-300">
+                {link.label}
+              </p>
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile Hamburger Menu */}
+        <div className="lg:hidden">
+          <HiBars3BottomRight
+            onClick={openNav}
+            className="text-white w-8 h-8 cursor-pointer"
+          />
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Nav;

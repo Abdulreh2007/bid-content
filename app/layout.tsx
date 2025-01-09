@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Responsivenav from "./components/Navbar/responsivenav";
+import Footer from "./components/footer";
 
 
 
@@ -31,10 +33,10 @@ export default function RootLayout({
       >
         
 
-       
+        <Responsivenav/>
         
         {children}
-        
+        <Footer/>
       </body>
     </html>
   );

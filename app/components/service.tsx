@@ -39,31 +39,37 @@ export default function ServicesSection() {
     ];
   
     return (
-      <section className="bg-gray-100 text-gray-900 py-16 px-8 md:px-16 lg:px-32">
+      <section className="bg-white text-black py-16 px-8 md:px-16 lg:px-32">
         <div className="max-w-6xl mx-auto">
           {/* Section Heading */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
-            Our Services Made For You?
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-6">
+              What We'll Help You With?
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">
-              Explore our range of services tailored to elevate your brand.
+            <p className="text-base md:text-lg text-gray-500">
+              Unlock the full potential of your brand with our tailored services.
             </p>
           </div>
   
           {/* Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-white hover:shadow-xl transition-shadow duration-300 rounded-lg p-6 text-center border border-gray-200"
+                className="bg-gray-50 text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300"
               >
                 {/* Icon */}
-                <div className="text-5xl mb-4">{service.icon}</div>
+                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#8becda]  to-[#0a7a75] text-white rounded-full mb-6 text-4xl">
+                  {service.icon}
+                </div>
                 {/* Title */}
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <h3 className="text-xl font-bold mb-4 text-gray-900">
+                  {service.title}
+                </h3>
                 {/* Description */}
-                <p className="text-sm text-gray-600">{service.description}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {service.description}
+                </p>
               </div>
             ))}
           </div>
